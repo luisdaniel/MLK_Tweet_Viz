@@ -3,14 +3,16 @@
 import java.util.Date;
 
 //the image stuff
-float fontSizeMax = 20;
-float fontSizeMin = 10;
-float spacing = 12;
+float fontSizeMax = 12;
+float fontSizeMin = 6;
+float spacing = 10;
 float kerning = 0.5;
 boolean fontSizeStatic = false;
 boolean blackAndWhite = false; 
 PFont font;
 PImage img;
+
+//for text appearing in order:
 float x = 0;
 float y = 10;
 
@@ -19,20 +21,20 @@ float y = 10;
 ArrayList<String> tweets = new ArrayList();
 FilterQuery fq = new FilterQuery();
 String keywords[] = {
-  "chelsea manning"
+  "obama"
 };
 
 String tweet;
 boolean tweetLoaded;
 
 void setup() {
-  size(533, 769);
-  background(0);
+  size(800, 600);
+  background(255);
   smooth();
 
   //image stuff
-  font = createFont("Times", 10);
-  img = loadImage("pic.png");
+  font = createFont("Times", 8);
+  img = loadImage("pic2.jpg");
 
 
 
@@ -55,7 +57,7 @@ void setup() {
 }
 
 void draw() {
-  fill(0, 1);
+  //fill(0, 1);
   //rect(0, 0, width, height);
 }
 
@@ -63,6 +65,8 @@ void drawTweet() {
   textAlign(255);
   int counter = 0;
   int charPos = 0;
+//  float x = (int) random(0, width);
+//  float y = (int) random(0, int(height/spacing))*spacing;
 
   while (charPos < tweet.length ()) {
     int imgX = (int) map(x, 0, width, 0, img.width);
@@ -74,21 +78,27 @@ void drawTweet() {
     pushMatrix();
     translate(x, y);
 
+    char letter = tweet.charAt(counter);
+    //figure out color
     if (fontSizeStatic) {
       textFont(font, fontSizeMax);
-      if (blackAndWhite) fill(greyscale);
-      else fill(c);
+//      if (blackAndWhite) fill(greyscale);
+//      else fill(c);
     } 
     else {
       // greyscale to fontsize
       float fontSize = map(greyscale, 0, 255, fontSizeMax, fontSizeMin);
       fontSize = max(fontSize, 1);
       textFont(font, fontSize);
-      if (blackAndWhite) fill(0);
-      else fill(c);
+      textFont(font, fontSizeMax);
+//      if (blackAndWhite) fill(0);
+//      else fill(c);
     }
-
-    char letter = tweet.charAt(counter);
+    //draw the letter
+    fill(255);
+    noStroke();
+    rect(0, -spacing, textWidth(letter)+1, spacing+1);
+    fill(c);
     text(letter, 0, 0);
     float letterWidth = textWidth(letter) + kerning;
     // for the next letter ... x + letter width
@@ -100,7 +110,13 @@ void drawTweet() {
       x = 0;
       y = y + spacing; // add line height
     }
-
+    
+    //end of pic
+    if (y >= height) {
+      y = 10;
+      x = 0;
+    }
+    
     counter++;
     charPos++;
     if (counter > tweet.length()-1) counter = 0;
