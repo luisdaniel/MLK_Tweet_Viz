@@ -40,10 +40,10 @@ void setup() {
 
   //OAuth Credentials
   ConfigurationBuilder cb = new ConfigurationBuilder();
-  cb.setOAuthConsumerKey("");
-  cb.setOAuthConsumerSecret("");
-  cb.setOAuthAccessToken("");
-  cb.setOAuthAccessTokenSecret("");
+  cb.setOAuthConsumerKey("muBHyzsmbgb0Aa9xjXF0wg");
+  cb.setOAuthConsumerSecret("bJ97B7PdGY46amtEhvzzN9vH2XhyvxRmzDggxFfKvc");
+  cb.setOAuthAccessToken("16931374-TusvFdBgBKYp8Nn1zvKN0X1daxuMu51FrO7Z39u0U");
+  cb.setOAuthAccessTokenSecret("EyR8cLkaRtFxwM90dct5ZDU89JtlMjJSqkTskdLHg");
 
   //Make Twitter Stream and query
   TwitterStream twitter = new TwitterStreamFactory(cb.build()).getInstance();
@@ -186,4 +186,5 @@ StatusListener listener = new StatusListener() {
     ex.printStackTrace();
   }
 };
+
 
